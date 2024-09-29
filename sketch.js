@@ -34,7 +34,7 @@
 //Carros | Livre | Animação,Aventura,Comédia,Esporte,Família
 //Meu Malvado Favorito | Livre | Animação,Ficção Cientifíca,Comédia,Fantasia,Família
 //Space Jam: Um Novo Legado | Livre | Animação,Esporte,Família,Fantasia,Ficção Cientifíca,Comédia
-
+//Depois da chuva | 10 | Drama
 //Adicionar Depois:
 
 //Shrek,Kung Fu Panda,Os Íncriveis
@@ -46,26 +46,71 @@
 let campoIdade;
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(800, 400);
+  createElement("h2", "Recomendador de Filmes");
+  createSpan("Sua idade:");
   campoIdade = createInput();
+  campoFantasia = createCheckbox("Gosta de Fantasia?");
+  campoDrama = createCheckbox("Gosta de Drama?");
+  campoAcao = createCheckbox("Gosta de Ação?");
+  campoFamilia = createCheckbox("Gosta de Família?");
+  campoComedia = createCheckbox("Gosta de Comédia?");
+  campoTerror = createCheckbox("Gosta de Terror?");
+  campoRomance = createCheckbox("Gosta de Romance?");
+  campoFiccaoCientifica = createCheckbox("Gosta de Ficção Científica?");
+  campoSuperHeroi = createCheckbox("Gosta de Super-Herói?");
+  campoEsporte = createCheckbox("Gosta de Esporte?");
+  campoThriller = createCheckbox("Gosta de Thriller?");
+  campoSuspense = createCheckbox("Gosta de Suspense?");
+  campoAnimacao = createCheckbox("Gosta de Animação?");
+  campoMisterio = createCheckbox("Gosta de Mistério?");
 }
 
 function draw() {
   background(220);
   let idade = campoIdade.value();
-  let recomendacao = gerarRecomendacao(idade);
-  text(recomendacao, width/2, height/2);
+  let gostaDeFantasia = campoFantasia.checked();
+  let gostaDeAventura = campoAventura.checked();
+  let gostaDeTerror = campoTerror.checked();
+  let gostaDeRomance = campoRomance.checked();
+  let gostaDeFiccaocientifica = campoFiccaoCientifica.checked();
+  let gostaDeSuperheroi = campoSuperHeroi.checked();
+  let gostaDeEsporte = campoEsporte.checked();
+  let gostaDeThriller = campoThriller.checked();
+  let gostaDeSuspense = campoSuspense.checked();
+  let gostaDeAnimacao = campoAnimacao.checked();
+  let gostaDeMisterio = campoMisterio.checked();
+  
+  let recomendacao = gerarRecomendacao(idade, gostaDeFantasia, gostaDeAventura);
+  background("white");
+  fill(color(76, 0, 115));
+  textAlign(CENTER, CENTER);
+  textSize(38);
+  text(recomendacao, width / 2, height / 2);
 }
-function gerarRecomendacao(idade){
-  if(idade >= 10){
-    if(idade >= 14){
-       return "O menino que descobriu o vento"  
-       }
-    else{
-     return "As aventuras de Pi"
-     }
-  }
-  else{
-    return "As aventuras de Chihiro"
+function gerarRecomendacao(idade, gostaDeFantasia, gostaDeAventura) {
+  if (idade >= 10) {
+    if (idade >= 14) {
+      return "O menino que descobriu o vento";
+    } else {
+      if (idade >= 12) {
+        if (gostaDeFantasia || gostaDeAventura) {
+          return "Homem-Aranha no aranhaverso";
+        } else {
+          return "Ladrões de Bicicleta";
+        }
+      } else {
+        if (gostaDeFantasia) {
+          return "As aventuras de Pi";
+        } else {
+          return "Depois da chuva";
+        }
+      }
+    }
+    if (gostaDeFantasia) {
+      return "As aventuras de Chihiro";
+    } else {
+      return "O feitiço do tempo";
+    }
   }
 }
